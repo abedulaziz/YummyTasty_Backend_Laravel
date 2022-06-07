@@ -8,7 +8,7 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function listUsers() {
-
-        return User::all();
+        $userInfo = User::select("first_name", "last_name", "email", "phone_number")->get();
+        return $userInfo;
     }
-}
+};
