@@ -20,5 +20,7 @@ Route::get('/search/{name}', [RestoController::class, 'getRestoByName']);
 
 Route::post('/add_resto', [RestoController::class, 'addResto']);
 
-
-Route::get('/login', [UserController::class, 'listUsers']);
+// user associated APIs
+Route::get('/list-users', [UserController::class, 'listUsers']);
+Route::post('/login', [UserController::class, 'logIn']);
+Route::post('/register/{user_type_id}', [UserController::class, 'logIn']);
