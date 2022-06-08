@@ -16,4 +16,16 @@ class RestaurantController extends Controller
             "restaurants" => $restos
         ], 200);
     }
+
+    // restaurant profile API
+    public function restaurantProfile(Request $request) {
+
+        $restoDetails = Restaurant::select("name", "description", "profile_pic", "address")->where("id", $request->id)->get();
+
+        return response()->json([
+            "status" => "Success",
+            "restaurant_details" => $restoDetails
+        ], 200);
+    }
+
 }

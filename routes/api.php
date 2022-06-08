@@ -31,3 +31,4 @@ Route::post('/update-profile', [UserController::class, 'updateProfile']);
 
 // restaurants associated APIs
 Route::get("/list_restaurants", [RestaurantController::class, "listRestaurants"]);
+Route::post("/restaurant-profile", [RestaurantController::class, "restaurantProfile"]);
