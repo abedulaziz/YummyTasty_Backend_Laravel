@@ -7,6 +7,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    // list users registered
     public function listUsers() {
         $userInfo = User::select("first_name", "last_name", "email", "phone_number")->get();
         return $userInfo;
@@ -30,7 +31,7 @@ class UserController extends Controller
 
         if (!User::where('email', '=', $request->email)->exists()) {
 
-            return User::insert([
+            User::insert([
                 "first_name" => $request->first_name,
                 "last_name" => $request->last_name,
                 "email" => $request->email,
@@ -40,21 +41,29 @@ class UserController extends Controller
                 "type" => "user"
             ]);
 
+            return response()->json([
+                "status" => "Success"
+            ], 200);
+
         }
         else return "This account already exists!";
 
     }
 
-    // get user info
+    // get user informations
     public function getUserInfo(Request $request){
-        die($request);
-        $user = [];
-        $user["first_name"] = $request->first_name;
-        $user["last_name"] = $request->last_name;
+
+        $retrieveIdData = User::select("first_name","last_name","email","gender", "phone_number")->where("id", $request->id)->get();
+
+            // $user = [];
+            // $user["first_name"] = $request->first_name;
+            // $user["last_name"] = $request->last_name;
 
         return response()->json([
             "status" => "Success",
-            "users" => $user
+            "user_info" => $retrieveIdData
         ], 200);
+
+
     }
 };

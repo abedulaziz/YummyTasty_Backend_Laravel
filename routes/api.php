@@ -24,4 +24,4 @@ Route::post('/add_resto', [RestoController::class, 'addResto']);
 Route::get('/list-users', [UserController::class, 'listUsers']);
 Route::post('/login', [UserController::class, 'logIn']);
 Route::post('/signup', [UserController::class, 'signUp']);
-Route::get('/users-registered/{user_type_id}', [UserController::class, 'usersRegistered']);
+Route::post('/user-profile', [UserController::class, 'getUserInfo']);
