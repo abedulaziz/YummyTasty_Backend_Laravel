@@ -27,4 +27,18 @@ class RestaurantController extends Controller
             "restaurant_details" => $restoDetails
         ], 200);
     }
+
+    public function addResto(Request $request) {
+
+        Restaurant::insert([
+            "name" => $request->name,
+            "description" => $request->description,
+            "address" => $request->address,
+            "profile_pic" => $request->profile_pic
+        ]);
+
+        return response()->json([
+            "status" => "Success"
+        ], 200);
+    }
 }
