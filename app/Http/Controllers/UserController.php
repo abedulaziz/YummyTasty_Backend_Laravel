@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
     // list users registered
@@ -35,7 +37,7 @@ class UserController extends Controller
                 "first_name" => $request->first_name,
                 "last_name" => $request->last_name,
                 "email" => $request->email,
-                "password" => $request->password,
+                "password" => $request->Hash::make($request->password),
                 "gender" => $request->gender,
                 "phone_number" => $request->phone_number,
                 "type" => "user"
@@ -55,15 +57,24 @@ class UserController extends Controller
 
         $retrieveIdData = User::select("first_name","last_name","email","gender", "phone_number")->where("id", $request->id)->get();
 
-            // $user = [];
-            // $user["first_name"] = $request->first_name;
-            // $user["last_name"] = $request->last_name;
-
         return response()->json([
             "status" => "Success",
             "user_info" => $retrieveIdData
         ], 200);
+    }
 
+    // update user profile
+    public function updateProfile(Request $request){
 
+        User::where("id", $request->id)->update([
+            "first_name" => $request->first_name,
+            "last_name" => $request->last_name,
+            "email" => $request->email,
+            "password" => Hash::make($request->password),
+            "phone_number" => $request->phone_number
+        ]);
+        return response()->json([
+            "status" => "Success"
+        ], 200);
     }
 };
