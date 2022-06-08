@@ -27,5 +27,4 @@ class RestaurantController extends Controller
             "restaurant_details" => $restoDetails
         ], 200);
     }
-
 }
