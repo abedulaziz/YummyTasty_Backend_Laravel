@@ -12,6 +12,7 @@ class UserController extends Controller
         return $userInfo;
     }
 
+    // sign-in API
     public function logIn(Request $request) {
 
         $userValidation = User::select("id", "first_name")->where([["email", $request->email], ["password", $request->password]])->first();
@@ -22,8 +23,26 @@ class UserController extends Controller
             ], 200);
         }
         else return "User not found!";
-        // return response()->json(["status" => "Success"], 200);
-        // return User::all();
+    }
+
+    // sign-up API
+    public function signUp(Request $request) {
+
+        if (!User::where('email', '=', $request->email)->exists()) {
+
+            return User::insert([
+                "first_name" => $request->first_name,
+                "last_name" => $request->last_name,
+                "email" => $request->email,
+                "password" => $request->password,
+                "gender" => $request->gender,
+                "phone_number" => $request->phone_number,
+                "type" => "user"
+            ]);
+
+        }
+        else return "This account already exists!";
+
     }
 
     // get user info

@@ -23,4 +23,5 @@ Route::post('/add_resto', [RestoController::class, 'addResto']);
 // user associated APIs
 Route::get('/list-users', [UserController::class, 'listUsers']);
 Route::post('/login', [UserController::class, 'logIn']);
-Route::post('/register/{user_type_id}', [UserController::class, 'logIn']);
+Route::post('/signup', [UserController::class, 'signUp']);
+Route::get('/users-registered/{user_type_id}', [UserController::class, 'usersRegistered']);
